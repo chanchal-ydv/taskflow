@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'https://taskflow-production-64b6.up.railway.app/api';
 
 // Helper function for smooth page transitions
 function navigateWithTransition(url) {
