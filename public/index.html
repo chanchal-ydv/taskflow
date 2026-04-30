@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+    <div class="auth-container">
+        
+        <!-- Premium Branding Header -->
+        <div class="auth-header">
+            <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h1>TaskFlow</h1>
+            <p>Streamline your workflow, empower your team.</p>
+        </div>
+
+        <div class="auth-wrapper">
+            <!-- Login Card -->
+            <div class="card auth-card" id="loginCard">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Please enter your details to sign in.</p>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Sign In <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <p class="auth-link">Don't have an account? <a href="#" onclick="toggleAuth('register')">Create one now</a></p>
+            </div>
+
+            <!-- Register Card -->
+            <div class="card auth-card" id="registerCard" style="display: none;">
+                <h2>Create Account</h2>
+                <p class="subtitle">Join the workspace and start managing tasks.</p>
+                <form id="registerForm">
+                    <div class="input-group">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="regName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <select id="regRole">
+                            <option value="Member">Team Member</option>
+                            <option value="Admin">Administrator</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Register <i class="fa-solid fa-user-plus"></i></button>
+                </form>
+                <p class="auth-link">Already have an account? <a href="#" onclick="toggleAuth('login')">Sign in instead</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        function toggleAuth(view) {
+            const login = document.getElementById('loginCard');
+            const register = document.getElementById('registerCard');
+            
+            if (view === 'login') {
+                register.style.display = 'none';
+                login.style.display = 'block';
+                login.style.animation = 'fadeIn 0.4s ease forwards';
+            } else {
+                login.style.display = 'none';
+                register.style.display = 'block';
+                register.style.animation = 'fadeIn 0.4s ease forwards';
+            }
+        }
+    </script>
+</body>
+</html>

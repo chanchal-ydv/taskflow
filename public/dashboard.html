@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+                TaskFlow
+            </div>
+            
+            <div id="navOverview" class="nav-item active" onclick="switchView('overview', this)"><i class="fa-solid fa-border-all"></i> Dashboard Overview</div>
+            <div id="navAdmin" class="nav-item" style="display: none;" onclick="switchView('admin', this)"><i class="fa-solid fa-shield-halved"></i> Admin Tools</div>
+            
+            <div style="flex-grow: 1;"></div>
+            <div class="nav-item" onclick="logout()" style="color: var(--danger);"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</div>
+        </div>
+
+        <!-- Main Center Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Dashboard <span style="color:var(--text-muted); font-weight:400; font-size:1.2rem;">| Welcome, <span id="welcomeName">User</span></span></h1>
+                <div class="header-right">
+                    <div class="user-badge">
+                        <div class="avatar" id="navAvatar">U</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 1: Overview (Visible by Default) -->
+            <div id="view-overview" class="view-section" style="display: block;">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Total Projects <i class="fa-solid fa-folder-tree"></i></div>
+                        <div class="kpi-value" id="statTotalProjects">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">My Active Tasks <i class="fa-solid fa-list-check"></i></div>
+                        <div class="kpi-value" id="statActiveTasks">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Overdue Tasks <i class="fa-solid fa-circle-exclamation text-danger"></i></div>
+                        <div class="kpi-value text-danger" id="statOverdueTasks">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Team Productivity <i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="kpi-value" id="statProductivity">0%</div>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 10px;">My Assigned Tasks</div>
+                <div id="tasksList"></div>
+            </div>
+
+            <!-- Tab 2: Admin Tools (Hidden by Default) -->
+            <div id="view-admin" class="view-section" style="display: none;">
+                <div class="action-grid">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span class="badge-admin"><i class="fa-solid fa-shield-halved"></i> Admin Panel</span>
+                        </div>
+                        <form onsubmit="event.preventDefault(); createProject();">
+                            <div class="form-group">
+                                <input type="text" id="projName" class="form-control" placeholder="Create new project..." required>
+                            </div>
+                            <button type="submit" class="btn-primary"><i class="fa-solid fa-plus"></i> Add Project</button>
+                        </form>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">Assign Task</div>
+                        <form onsubmit="event.preventDefault(); createTask();">
+                            <div class="form-group">
+                                <input type="text" id="taskTitle" class="form-control" placeholder="Task Title" required>
+                            </div>
+                            <div class="form-row">
+                                <select id="taskProject" class="form-control" required><option value="">Select Project</option></select>
+                                <select id="taskUser" class="form-control" required><option value="">Assign To</option></select>
+                            </div>
+                            <div class="form-row">
+                                <input type="date" id="taskDate" class="form-control" required>
+                                <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> Assign Task</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <h3 style="font-size: 1.1rem;">Recent Team Activity</h3>
+            <div class="activity-list" id="recentActivityList"></div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        window.onload = initDashboard;
+    </script>
+</body>
+</html>
